@@ -1,37 +1,61 @@
 //The MIT License (MIT) - See Licence.txt for details
-
 //Copyright (c) 2013 Mick Grierson, Matthew Yee-King, Marco Gillies
-
 //Desktop Template
 Maxim maxim;
 AudioPlayer player;
+float ratio;
+boolean playing = false;
 
 void setup()
 {
   maxim = new Maxim(this);
   player = maxim.loadFile("mykbeat.wav");
-  size(640, 960);
+  size(640, 480);
   
-  background(128);
-
-
+  player.setLooping(false);
 }
 
 void draw()
 {
-// code that happens every frame
+  ratio = (float)mouseX / (float)width;
+  ratio *= 2;
+  if(playing)
+  {
+    fill(0,255,0);
+  }
+  else{
+    fill(0,255,255);
+  }
+  rect(0,0,width,height/2);
 }
 
 void mouseDragged()
 {
-  point(mouseX,mouseY);
-// code that happens when the mouse moves
-// with the button down
+    
+  if(mouseY > height/2)
+  {
+  player.speed(ratio);
+  println(ratio);
+  fill(ratio*128);
+  }
+  
+  rect(0,height/2,width,height/2);
 }
 
 void mousePressed()
 {
-  player.play();
+    player.cue(0);
+
+    if(mouseY < height/2)
+    {
+        playing = !playing;
+        if(playing){
+          player.play();
+        }
+        else{
+          player.stop();
+        }
+    }    
 // code that happens when the mouse button
 // is pressed
 }

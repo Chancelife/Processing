@@ -4,23 +4,30 @@ int currentImage = 0;
   
 void setup()
 {
-  images = loadImages("jpgs/movie",".jpg",4);
-  size(images[0].width/10,images[0].height/10);
+  images = loadImages("jpgs/movie",".jpg",134);
+  size(images[0].width,images[0].height);
 
 }
 
 void draw()
 {
-    image(images[currentImage],0,0,images[0].width/2,images[0].height/2);
-    currentImage += 1; 
-    if(currentImage >= images.length)
-    {
-      currentImage = 0;
-    }
+      image(images[currentImage],0,0);
+      if(playing){
+      currentImage += 1; 
+      if(currentImage >= images.length)
+      {
+        currentImage = 0;
+      }
+      image(images[currentImage],0,0);
+      }
 }
 
 void mousePressed()
 {
+    playing = !playing;
+}
 
-    
+void mouseDragged()
+{
+  
 }
