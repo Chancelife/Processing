@@ -29,5 +29,5 @@ void mousePressed()
 
 void mouseDragged()
 {
-  
+    currentImage = (int)(mouseX/width * 134);
 }
